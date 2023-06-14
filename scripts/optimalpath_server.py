@@ -13,6 +13,10 @@ path = []
 path_old = []
 numberOfStations = 0
 firstime_run = False
+width = 384
+originx = -9.6
+originy = -9.6
+resolution = 0.05
 
 path_package = '/home/swarm/catkin_ws/src/swarm_pathfinding'
 path_distanceMatrix = path_package+'/json/distanceMatrix.json'
@@ -41,8 +45,8 @@ def callback(path):
 
     for index in range(0,len(path)):
         p = Point()
-        p.x = ((path[index]%384)-200)*0.05
-        p.y = ((int(path[index]/384))-200)*0.05
+        p.x = ((path[index]%width)-abs(originx/resolution))*resolution
+        p.y = ((int(path[index]/width))-abs(originy/resolution))*resolution
         p.z = 0.0
 
         linestrip.points.append(p)
