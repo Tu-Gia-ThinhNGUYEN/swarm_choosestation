@@ -32,7 +32,7 @@ x_old = []
 y_old = []
 numberOfStations = 0
 firstime_run = False
-package_path = '/home/swarm/catkin_ws/src/swarm_choosestation/csv/pos.csv'
+package_path = '/home/swarmpc/catkin_ws/src/swarm_choosestation/csv/pos.csv'
 
 def callback(x,y): 
     global numberOfStations

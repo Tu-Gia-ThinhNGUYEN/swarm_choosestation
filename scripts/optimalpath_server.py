@@ -18,7 +18,7 @@ originx = -9.6
 originy = -9.6
 resolution = 0.05
 
-path_package = '/home/swarm/catkin_ws/src/swarm_pathfinding'
+path_package = '/home/swarmpc/catkin_ws/src/swarm_pathfinding'
 path_distanceMatrix = path_package+'/json/distanceMatrix.json'
 path_pathTemp = path_package + '/json/pathTemp.json'
 path_pathArray = path_package + '/json/pathArray.json'

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 import rospy
 from visualization_msgs.msg import Marker
-from geometry_msgs.msg import Point
+from geometry_msgs.msg import Point, PoseWithCovarianceStamped
 from nav_msgs.msg import Odometry
 import json
 from datetime import datetime
 
 filename = datetime.now().strftime("%Y%m%d-%H%M%S")
-json_path = "/home/swarm/catkin_ws/src/swarm_choosestation/json/"+filename+".json"
+json_path = "/home/swarmpc/catkin_ws/src/swarm_choosestation/json/"+filename+".json"
 
 linestrip1_pub = rospy.Publisher("/sw1_linestrip", Marker,  queue_size=10)
 linestrip2_pub = rospy.Publisher("/sw2_linestrip", Marker,  queue_size=10)
@@ -30,9 +30,10 @@ xp = 0.0 # x position in grid coordinate
 yp = 0.0 # y position in grid coordinate
 xm = 0.0 # x position in meter coordinate
 ym = 0.0 # y position in meter coordinate
-originX = 1000
-originY = 1000
-resolution = 0.01 # 5cm per pixel
+originX = 960
+originY = 960
+resolution = 0.005 # 5cm per pixel
+width = 3840
 
 def linestrip(x,y,id,r,g,b,linestrip_pub):   
     linestrip = Marker()
@@ -53,6 +54,7 @@ def linestrip(x,y,id,r,g,b,linestrip_pub):
         p.z = 0.0
         linestrip.points.append(p)
     # Publish the MarkerArray message
+    rospy.loginfo("x: " + str((x[index]-originX)*resolution) + "     y: "+str((y[index]-originY)*resolution))
     linestrip_pub.publish(linestrip)
 
 def odometrysw1(msg):
@@ -76,6 +78,7 @@ def odometrysw1(msg):
             sw1_x.append(xp)
             sw1_y.append(yp)
             linestrip(sw1_x,sw1_y,2001,1,0,0,linestrip1_pub)
+            rospy.loginfo("xm: " + str(xm) + "     ym: "+str(ym))
         rate.sleep()
 
 def odometrysw2(msg):
@@ -125,9 +128,9 @@ def odometrysw3(msg):
 
 if __name__ == "__main__":
     rospy.init_node('footprint_server', anonymous=True) #make node
-    rospy.Subscriber('/sw1/odom',Odometry,odometrysw1)
-    rospy.Subscriber('/sw2/odom',Odometry,odometrysw2)
-    rospy.Subscriber('/sw3/odom',Odometry,odometrysw3)
+    rospy.Subscriber('/sw1/amcl_pose',PoseWithCovarianceStamped,odometrysw1)
+    rospy.Subscriber('/sw2/amcl_pose',PoseWithCovarianceStamped,odometrysw2)
+    rospy.Subscriber('/sw3/amcl_pose',PoseWithCovarianceStamped,odometrysw3)
     rospy.spin()
     rospy.loginfo("Path has been saved at: "+json_path)
     dictionary = {

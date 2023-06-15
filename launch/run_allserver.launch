@@ -2,4 +2,5 @@
   <node name="pictogram_server" pkg="swarm_choosestation" type="pictogram_server.py" output="screen"/>
   <node name="optimalPath_server" pkg="swarm_choosestation" type="optimalpath_server.py" output="screen"/>
   <node name="robotname_server" pkg="swarm_choosestation" type="robotname_server.py" output="screen"/>
+  <node name="footprint_server" pkg="swarm_choosestation" type="footprint_server.py" output="screen"/>
 </launch>
