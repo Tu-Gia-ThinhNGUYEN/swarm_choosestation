@@ -2,6 +2,7 @@
 import rospy
 from visualization_msgs.msg import Marker
 from nav_msgs.msg import Odometry
+from geometry_msgs.msg import Point, PoseWithCovarianceStamped
 
 robotname1_pub = rospy.Publisher("/sw1_robotname", Marker,  queue_size=10)
 robotname2_pub = rospy.Publisher("/sw2_robotname", Marker,  queue_size=10)
@@ -102,7 +103,7 @@ def sw3robotname(msg):
 
 if __name__ == "__main__":
     rospy.init_node('robotname_server', anonymous=True) #make node
-    rospy.Subscriber('/sw1/odom',Odometry,sw1robotname)
-    rospy.Subscriber('/sw2/odom',Odometry,sw2robotname)
-    rospy.Subscriber('/sw3/odom',Odometry,sw3robotname)
+    rospy.Subscriber('/sw1/amcl_pose',PoseWithCovarianceStamped,sw1robotname)
+    rospy.Subscriber('/sw2/amcl_pose',PoseWithCovarianceStamped,sw2robotname)
+    rospy.Subscriber('/sw3/amcl_pose',PoseWithCovarianceStamped,sw3robotname)
     rospy.spin()

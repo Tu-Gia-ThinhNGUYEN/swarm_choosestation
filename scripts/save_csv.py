@@ -24,7 +24,7 @@ rate = rospy.Rate(1)  # Publish at a rate of 1 Hz
 x = []
 y = []
 numberOfStations = 0
-package_path = '/home/swarm/catkin_ws/src/swarm_choosestation/csv/pos.csv'
+package_path = '/home/swarmpc/catkin_ws/src/swarm_choosestation/csv/pos.csv'
 
 def callback(msg):
     point = PointStamped()
