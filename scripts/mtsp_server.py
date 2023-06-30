@@ -18,12 +18,12 @@ originx = -9.6
 originy = -9.6
 resolution = 0.05
 
-path_package = '/home/swarm/catkin_ws/src/swarm_pathfinding'
-path_distanceMatrix = path_package+'/json/distanceMatrix.json'
-path_pathTemp = path_package + '/json/pathTemp.json'
-path_pathArray = path_package + '/json/pathArray.json'
-path_pathComponent = path_package + '/json/pathComponent.json'
-path_opttimalPath = path_package + '/json/opttimalPath.json'
+path_package = '/home/swarm/catkin_ws/src/swarm_pathfinding/json/mTSP'
+path_distanceMatrix = path_package+'/distanceMatrix.json'
+path_pathTemp = path_package + '/pathTemp.json'
+path_pathArray = path_package + '/pathArray.json'
+path_pathComponent = path_package + '/pathComponent.json'
+path_opttimalPath = path_package + '/opttimalPath.json'
 
 def callback(path):  
     rospy.loginfo(path)  

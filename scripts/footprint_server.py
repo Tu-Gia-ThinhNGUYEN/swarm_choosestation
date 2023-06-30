@@ -7,7 +7,7 @@ import json
 from datetime import datetime
 
 filename = datetime.now().strftime("%Y%m%d-%H%M%S")
-json_path = "/home/swarmpc/catkin_ws/src/swarm_choosestation/json/"+filename+".json"
+json_path = "/home/swarm/catkin_ws/src/swarm_choosestation/json/"+filename+".json"
 
 linestrip1_pub = rospy.Publisher("/sw1_linestrip", Marker,  queue_size=10)
 linestrip2_pub = rospy.Publisher("/sw2_linestrip", Marker,  queue_size=10)
@@ -128,7 +128,7 @@ def odometrysw3(msg):
 
 if __name__ == "__main__":
     rospy.init_node('footprint_server', anonymous=True) #make node
-    rospy.Subscriber('/sw1/amcl_pose',PoseWithCovarianceStamped,odometrysw1)
+    rospy.Subscriber('/amcl_pose',PoseWithCovarianceStamped,odometrysw1)
     rospy.Subscriber('/sw2/amcl_pose',PoseWithCovarianceStamped,odometrysw2)
     rospy.Subscriber('/sw3/amcl_pose',PoseWithCovarianceStamped,odometrysw3)
     rospy.spin()
